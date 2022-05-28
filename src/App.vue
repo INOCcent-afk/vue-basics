@@ -1,17 +1,54 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h1>{{ title }}</h1>
+  <div class="">
+    <input type="text" ref="name" />
+    <button @click="handleClick">click me</button>
+  </div>
+  <div class="" v-if="showModal">
+    <ModalVue
+      title="Hello World"
+      content="lorem10013010230213asdawq sdad"
+      @close="closeModal"
+    >
+      <h1>Title</h1>
+      <p>Content</p>
+      <template v-slot:links>
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+      </template>
+    </ModalVue>
+  </div>
+  <button @click="openModal">Open Modal</button>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ModalVue from "./components/Modal.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    ModalVue,
+  },
+  data() {
+    return {
+      title: "Hello world",
+      showModal: false,
+    };
+  },
+  methods: {
+    handleClick() {
+      this.$refs.name.focus();
+    },
+
+    openModal() {
+      this.showModal = true;
+    },
+
+    closeModal() {
+      this.showModal = false;
+    },
+  },
+};
 </script>
 
 <style>
@@ -22,5 +59,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+h1 {
+  border-bottom: 1px solid;
+  padding: 20px;
 }
 </style>
